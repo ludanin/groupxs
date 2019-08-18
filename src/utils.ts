@@ -36,6 +36,9 @@ export function canUseBlock(books: book[], block?: Block): boolean {
   return true;
 }
 
+/**
+ * Returns true if the `books` array has distinct books
+ */
 export function hasDistinctBook(books: book[]): boolean {
   let prev = "";
   for (const b of books) {
@@ -52,6 +55,10 @@ export function sortBlocks(blocks: Block[]) {
   blocks.sort((a, b) => a.id < b.id ? -1 : 1);
 }
 
+/**
+ * Generates an ID for an array of `Block`
+ * @param blocks
+ */
 export function blocksID(blocks: Block[]): string {
   let id = "";
 
