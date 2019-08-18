@@ -36,7 +36,7 @@ export function canUseBlock(books: book[], block?: Block): boolean {
 export function hasDistinctBook(books: book[]): boolean {
   let prev = "";
   for (const b of books) {
-    if (prev !== b) return true;
+    if (prev !== b && prev !== "") return true;
 
     prev = b;
   }
