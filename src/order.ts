@@ -124,4 +124,20 @@ export default class Order {
 
     return [...quintets, ...quartets, ...trios, ...pairs, ...solo];
   }
+
+  /**
+   * Returns this order as an array, e.g.
+   * `{ book1: 2, book2: 1 }` becomes `["book1", "book1", "book2"]`
+   */
+  get array(): book[] {
+    const array: book[] = [];
+
+    for (let i = 1; i <= 5; i++) {
+      const bookN = `book${i}`;
+      const filledArray = new Array(this[bookN]).fill(bookN);
+      array.push(...filledArray);
+    }
+
+    return array;
+  }
 }

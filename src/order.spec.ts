@@ -14,6 +14,18 @@ describe("test Order constructor", () => {
   });
 });
 
+describe("test Order.array", () => {
+  it("returns a valid array", () => {
+    const order = new Order({ book1: 2, book2: 1 });
+    const { array } = order;
+
+    expect(array.length).to.be.equal(3);
+    expect(array[0]).to.be.equal("book1");
+    expect(array[1]).to.be.equal("book1");
+    expect(array[2]).to.be.equal("book2");
+  });
+});
+
 describe("test Order.arrangements", () => {
   // What are the possible blocks to make with the following books?
   // books = [book1, book2, book3]
