@@ -34,4 +34,13 @@ describe("test utils.getRemainder", () => {
 
     expect(remainder.length).to.be.equal(2);
   });
+  it("works with multiple blocks", () => {
+    const books: book[] = ["book1", "book1", "book2"];
+    const blockA = new Block("book1");
+    const blockB = new Block("book1");
+    const remainder = utils.getRemainder(books, blockA, blockB);
+
+    expect(remainder.length).to.be.equal(1);
+    expect(remainder[0]).to.be.equal("book2");
+  });
 });
