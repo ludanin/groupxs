@@ -27,4 +27,11 @@ describe("test utils.getRemainder", () => {
     expect(remainder.length).to.be.equal(1);
     expect(remainder[0]).to.be.equal("book2");
   });
+  it("properly subtracts only a single book", () => {
+    const books: book[] = ["book1", "book1", "book2"];
+    const block = new Block("book1");
+    const remainder = utils.getRemainder(books, block);
+
+    expect(remainder.length).to.be.equal(2);
+  });
 });

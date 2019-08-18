@@ -8,10 +8,9 @@ import Block from "./block";
 export function getRemainder(books: book[], block: Block): book[] {
   let remainder: book[] = [...books];
 
-  for (const s of books) {
-    if (block.has[`${s}`]) {
-      remainder = remainder.filter((r) => r !== s);
-    }
+  for (const b of block.books) {
+    const i = remainder.findIndex((r) => b === b);
+    remainder = [...remainder.slice(0, i), ...remainder.slice(i + 1)];
   }
 
   return remainder;
