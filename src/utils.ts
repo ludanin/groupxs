@@ -10,7 +10,7 @@ export function getRemainder(books: book[], ...blocks: Block[]): book[] {
 
   for (const block of blocks) {
     for (const b of block.books) {
-      const i = remainder.findIndex((r) => b === b);
+      const i = remainder.findIndex((r) => r === b);
       remainder = [...remainder.slice(0, i), ...remainder.slice(i + 1)];
     }
   }
