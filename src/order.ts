@@ -1,5 +1,6 @@
-import { book } from ".";
 import Block from "./block";
+import { book } from ".";
+import * as utils from "./utils";
 
 export default class Order {
   readonly book1: number = 0;
@@ -148,5 +149,80 @@ export default class Order {
     }
 
     return array;
+  }
+
+  get solutions(): Block[][] {
+    const { array, arrangements } = this;
+
+    const solutions: Block[][] = [];
+    // Since we cannot compare javascript objects, we need to generate
+    // an ID for each solution (which is by itself a group of `Block`s)
+    const savedSolutions: string[] = [];
+
+    const pushSolution = (solution: Block[]) => {
+      utils.sortBlocks(solution);
+      const solutionID = utils.blocksID(solution);
+      if (savedSolutions.findIndex((id) => id === solutionID) < 0) {
+        solutions.push(solution);
+        savedSolutions.push(solutionID);
+      }
+    };
+
+    const recursiveSearch = (
+      books: book[],
+      blocks: Block[],
+    ) => {
+      if (books.length === 0) { pushSolution(blocks); return; }
+
+      const order = new Order({}, books);
+      for (const b of order.arrangements) {
+        const remainder = utils.getRemainder(array, ...blocks, b);
+
+        if (utils.hasDistinctBook(remainder) === false) {
+          if (remainder.length === 0) {
+            pushSolution([...blocks, b]);
+          } else {
+            const fill: Block[] = new Array(remainder.length).fill(new Block(remainder[0]));
+            pushSolution([...blocks, b, ...fill]);
+          }
+        } else {
+          recursiveSearch(remainder, [...blocks, b]);
+        }
+      }
+    };
+
+    for (const block of arrangements) {
+      const remainder = utils.getRemainder(array, block);
+      recursiveSearch(remainder, [block]);
+    }
+
+    return solutions;
+  }
+
+  /**
+   * Returns the best solution with the lowest price for this order.
+   */
+  get bestSolution(): {
+    books: book[][],
+    price: number;
+  } {
+    const { solutions } = this;
+    let lowestIndex = 0;
+    let lowestPrice = 0;
+    for (let i = 0; i < solutions.length; i++) {
+      const blocks = solutions[i];
+      let price = 0;
+      blocks.forEach(b => price += b.price);
+      if (lowestPrice === 0) lowestPrice = price;
+      if (price < lowestPrice) {
+        lowestPrice = price;
+        lowestIndex = i;
+      }
+    }
+
+    const books: book[][] = [];
+    solutions[lowestIndex].forEach((block) => books.push(block.books));
+
+    return { books, price: lowestPrice};
   }
 }
