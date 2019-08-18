@@ -32,8 +32,9 @@ export default class Order {
    * Returns all possible ways `Block`s of books can be arranged using the
    * source of this order.
    */
-  arrangements(): Block[] {
+  get arrangements(): Block[] {
     const books: book[] = [];
+
     if (this.book1 > 0) books.push("book1");
     if (this.book2 > 0) books.push("book2");
     if (this.book3 > 0) books.push("book3");
