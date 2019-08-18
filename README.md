@@ -6,6 +6,17 @@ To run the tests you'd probably desire to remove any code executed at
 Whenever you run `yarn test` it's going to trigger the code written there,
 and the current algorithm is not optimized for speed.
 
+## How to run?
+
+To run the tests simply run `yarn test`.
+
+To run the program simply run `yarn start`.
+
+An `Order` is defined at `src/index.ts`, you can change it to see how the
+program behaves with different orders. By the way, the current approach
+to solve the task is a bit of an overkill, besides the lowest price you
+can see every single possible way to arrange the books of an `Order`.
+
 # Official Problem
 
 ## Description
