@@ -151,14 +151,25 @@ export default class Order {
     return array;
   }
 
+  /**
+   * Returns all possible ways this order can be arranged.
+   */
   get solutions(): Block[][] {
     const { array, arrangements } = this;
 
+    /**
+     * Solutions are essentially groups of `Block`s, which is why this
+     * array has two dimensions, one holding the solution--the other its
+     * content.
+     */
     const solutions: Block[][] = [];
     // Since we cannot compare javascript objects, we need to generate
     // an ID for each solution (which is by itself a group of `Block`s)
     const savedSolutions: string[] = [];
 
+    // We don't want repeated solutions on our order, this function generates
+    // an ID for each solution and tries to identify if we haven't yet
+    // pushed said solution to our results.
     const pushSolution = (solution: Block[]) => {
       utils.sortBlocks(solution);
       const solutionID = utils.blocksID(solution);
@@ -168,6 +179,12 @@ export default class Order {
       }
     };
 
+    // We'll search for all solutions (ways to arrange our order) in the
+    // code below, to do so (and avoid code repetition) we'll use a
+    // recursive function to maintain conciseness.
+
+    // Calls itself until the current path has no distinct remnants (you
+    // can still find arrange Blocks with distinct books)
     const recursiveSearch = (
       books: book[],
       blocks: Block[],
@@ -191,6 +208,10 @@ export default class Order {
       }
     };
 
+    // We'll calculate each possible way to arrange our books, to ensure
+    // all possible paths are taken.
+    // We do so by iterating through each `Block` in our `arrangements` and
+    // calling recursiveSearch from within the loop.
     for (const block of arrangements) {
       const remainder = utils.getRemainder(array, block);
       recursiveSearch(remainder, [block]);
