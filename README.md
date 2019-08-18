@@ -13,14 +13,14 @@ environment.
 
 Install all dependencies with `npm install` (or `yarn` if you prefer).
 
-To run the tests simply run `npm test`.
+To run the tests run `npm test`.
 
-To run the program simply run `npm start`.
+To run the program run `npm start`.
 
 There's an `Order` defined at `src/index.ts`, you can change it to see how
 the program behaves with different orders. By the way, the current approach
 to solve the task at hand is a bit of an overkill, besides the lowest price
-you can see every single possible way to arrange the books of an `Order`
+you can see every single way to arrange the books of an `Order`
 --so if you asked for a performant version of this same question I'd probably
 choose another way to solve this.
 
