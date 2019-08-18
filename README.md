@@ -1,3 +1,11 @@
+# Important Note
+
+To run the tests you'd probably desire to remove any code executed at
+`src/index.ts`, such as the one calculating the mission's solution.
+
+Whenever you run `yarn test` it's going to trigger the code written there,
+and the current algorithm is not optimized for speed.
+
 # Official Problem
 
 ## Description
@@ -51,10 +59,10 @@ For example, how much does this basket of books cost? (answer: 51.20 EUR)
 # Goals and Progress
 
 ## Goals:
-  * Code the necessary boilerplate, i.e. Types, Stub functions, etc.
-  Prioritize writing code relating to purchase orders first, such as an
-  interface defining what is an order, its possible discounts, etc.;
-  * Trying to always combine books to sell them with discounts, in how
-  many ways can the order `{first: 1, second: 1, third: 1}` be deconstructed?
-  * What are the valid ways to charge for order `{ first: 2, second: 1, third: 1 }`?
-  * Get the lowest possible value for an order;
+  * ~~Code the necessary boilerplate, i.e. Types, Stub functions, etc.~~
+  ~~Prioritize writing code relating to purchase orders first, such as an~~
+  ~~interface defining what is an order, its possible discounts, etc.;~~
+  * ~~Trying to always combine books to sell them with discounts, in how~~
+  ~~many ways can the order `{first: 1, second: 1, third: 1}` be deconstructed?~~
+  * ~~What are the valid ways to charge for order `{ first: 2, second: 1, third: 1 }`?~~
+  * ~~Get the lowest possible value for an order;~~
